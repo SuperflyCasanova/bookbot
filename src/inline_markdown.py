@@ -43,18 +43,18 @@ def split_nodes_image(old_nodes):
             continue
         for image in images:
             sections = original_text.split(f"![{image[0]}]([{image[1]}])", 1)
-        if len(sections) % 2 == 0:
-            raise ValueError("Invalid markdown")
-        if sections[0] != "":
-            new_nodes.append(TextNode(sections[0], text_type_text))
-        new_nodes.append(
-            TextNode(
-                image[0],
-                text_type_image,
-                image[1],
+            if len(sections) % 2 == 0:
+                raise ValueError("Invalid markdown")
+            if sections[0] != "":
+                new_nodes.append(TextNode(sections[0], text_type_text))
+            new_nodes.append(
+                TextNode(
+                    image[0],
+                    text_type_image,
+                    image[1],
+                )
             )
-        )
-        original_text = sections[1]
+            original_text = sections[1]
         if original_text != "":
             new_nodes.append(TextNode(original_text, text_type_text))
     return new_nodes
