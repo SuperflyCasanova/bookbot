@@ -24,9 +24,9 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
             if sections[i] == "":
                 continue
             if i % 2 == 0:
-                split_nodes.append(TextNode.sections[i], text_type_text)
+                split_nodes.append(TextNode(sections[i], text_type_text))
             else:
-                split_nodes.append(TextNode.sections[i], text_type)
+                split_nodes.append(TextNode(sections[i], text_type))
         new_nodes.extend(split_nodes)
     return new_nodes
 
