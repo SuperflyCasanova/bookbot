@@ -72,18 +72,18 @@ def split_nodes_link(old_nodes):
             continue
         for link in links:
             sections = original_text.split(f"![{link[0]}]([{link[1]}])", 1)
-        if len(sections) % 2 == 0:
-            raise ValueError("Invalid markdown")
-        if sections[0] != "":
-            new_nodes.append(TextNode(sections[0], text_type_text))
-        new_nodes.append(
-            TextNode(
-                link[0],
-                text_type_link,
-                link[1],
+            if len(sections) % 2 == 0:
+                raise ValueError("Invalid markdown")
+            if sections[0] != "":
+                new_nodes.append(TextNode(sections[0], text_type_text))
+            new_nodes.append(
+                TextNode(
+                    link[0],
+                    text_type_link,
+                    link[1],
+                )
             )
-        )
-        original_text = sections[1]
+            original_text = sections[1]
         if original_text != "":
             new_nodes.append(TextNode(original_text, text_type_text))
     return new_nodes
